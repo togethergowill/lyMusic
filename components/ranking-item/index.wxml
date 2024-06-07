@@ -1,0 +1,14 @@
+<wxs src="/utils/merge-name.wxs" module="merge" />
+<view class="ranking-item" wx:if="{{ itemData.name }}" bind:tap="onRankingItemTap">
+	<view class="info">
+		<view class="name">{{ itemData.name }}</view>
+		<view class="songs" wx:for="{{ 3 }}" wx:key="id">
+			<text class="index text">{{ index + 1 }}.</text>
+			<text class="item text">{{ itemData.tracks[index].name }}</text>
+			<text class="singer text">{{ merge.mergeName(itemData.tracks[index].ar) }}</text>
+		</view>
+	</view>
+	<view class="album">
+		<music-album imageUrl="{{ itemData.coverImgUrl }}" playCount="{{ itemData.playCount }}" hasBottom="{{ false }}"></music-album>
+	</view>
+</view>

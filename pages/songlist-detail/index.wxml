@@ -1,0 +1,3 @@
+<block wx:for="{{ songlistMenu }}" wx:key="cat">
+	<category-menu itemData="{{ item }}"></category-menu>
+</block>

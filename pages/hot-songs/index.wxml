@@ -1,0 +1,13 @@
+<wxs src="/utils/merge-name.wxs" module="merge"/>
+<view class="hot-songs">
+	<view class="header">
+	  <menu-header wx:if="{{ type === 'menu' && hotSongsInfo.name}}" hotSongsInfo="{{ hotSongsInfo }}"></menu-header>
+		<area-header wx:else title="{{ title }}"></area-header>
+	</view>
+	<view class="content">
+		<view class="item" wx:for="{{ hotSongsInfo.tracks }}" wx:key="id">
+			<songs-item data-index="{{ index }}" bind:tap="getPlaySongList" index="{{ index + 1 }}" name="{{ item.name }}" singer="{{ merge.mergeName(item.ar) }}" 
+			itemId="{{ item.id }}"></songs-item>
+		</view>
+	</view>
+</view>

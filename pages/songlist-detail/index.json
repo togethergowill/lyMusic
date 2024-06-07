@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "category-menu":"/components/category-menu/index"
+  }
+}

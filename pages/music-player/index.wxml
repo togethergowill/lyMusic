@@ -1,0 +1,75 @@
+<wxs src="/utils/merge-name.wxs" module="merge" />
+<wxs src="/utils/format.wxs" module="fmt" />
+<image class="bg-image" src="{{ currentSong.al.picUrl }}" mode="aspectFill" />
+<view class="cover"></view>
+
+<nav-bar bind:goBackPreLevel="goBackPreLevel">
+	<view slot="center">
+		<view class="page-title">
+			<block wx:for="{{ pageTitles }}" wx:key="*this">
+				<view 
+					class="item {{ currentIndex=== index?'active':'' }}" 
+					bind:tap="onPageTitleItemClick"
+					data-index="{{ index }}"
+				>{{ item }}</view>
+				<text wx:if="{{ index!== pageTitles.length - 1 }}">|</text>
+			</block>
+		</view>
+	</view>
+</nav-bar>
+
+
+<swiper 
+	style="height:{{ contentHeight }}px" 
+	class="swiper-content"  
+	bindchange="onSwiperChange"
+	current="{{ currentIndex }}"
+	>
+	<swiper-item class="music">
+		<view class="album">
+			<image class="image" src="{{ currentSong.al.picUrl }}" mode="widthFix" />
+		</view>
+		<view class="info">
+			<view class="name">{{ currentSong.al.name }}</view>
+			<view class="singer">{{ merge.mergeName(currentSong.ar) }}</view>
+		</view>
+		<view class="lyric">{{ lyricInfo[currentLyricIndex].text }}</view>
+		<view class="progress">
+			<slider 
+				class="slider" 
+				block-size="12" 
+				value="{{ sliderValue }}"
+				bindchange="onSliderChange"
+				bindchanging="onSliderChanging"
+				bind:touchstart="readyPause"
+			></slider>
+		</view>
+		<view class="time">
+			<view class="current">{{ fmt.formatTime(currentTime) }}</view>
+			<view class="duration">{{ fmt.formatTime(durationTime) }}</view>
+		</view>
+		<view class="control">
+			<image src="/assets/images/player/play_{{ playModeName }}.png" mode="" class="btn mode"  bind:tap="onChangePlayMode"/>
+			<image src="/assets/images/player/play_prev.png" mode="" class="btn prev" bind:tap="onPrevTap" />
+			<image src="/assets/images/player/play_pause.png" mode="" class="btn play" bind:tap="onPlayClick" wx:if="{{ isPlaySong }}"/>
+			<image src="/assets/images/player/play_resume.png"class="btn play" bind:tap="onPlayClick" mode="" wx:else />
+			<image src="/assets/images/player/play_next.png" mode="" class="btn nexr" bind:tap="onNextTap" />
+			<image src="/assets/images/player/play_music.png" mode="" class="btn list" />
+		</view>
+	</swiper-item>
+	<swiper-item class="lyric-page">
+	 <scroll-view 
+	 	scroll-y 
+		class="lyric-list"
+		scroll-top="{{ lyricScrollTop }}"
+		scroll-with-animation
+	>
+		<view 
+		  class="lyric-item {{ currentLyricIndex === index ?'active':'' }}" 
+			wx:for="{{ lyricInfo }}" 
+			wx:key="time"
+			style="padding-top: {{ index === 0 ? screenHeight - 200: 0 }}rpx; padding-bottom: {{ index === lyricInfo.length - 1 ? screenHeight + 200: 0 }}rpx;"
+		> {{ item.text }} </view>
+	 </scroll-view>
+	</swiper-item>
+</swiper> 

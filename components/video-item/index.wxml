@@ -1,0 +1,6 @@
+<view class="item" bind:tap="onVideoItemClick">
+	<view class="content">
+		<mv-album itemData="{{ itemData }}" class="wrap"/>
+	</view>
+	<view class="title">{{ itemData.mv.title }}</view>
+</view>

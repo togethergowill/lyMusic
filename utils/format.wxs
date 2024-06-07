@@ -1,0 +1,26 @@
+function formatNum(num) {
+  var numFlag = num / 10000
+  if (numFlag >= 1 && numFlag <= 9999) {
+    return numFlag.toFixed(1) + "万"
+  } else if (numFlag < 1) {
+    return num
+  } else {
+    return (num / 100000000).toFixed(1) + "亿"
+  }
+}
+function padLeft(time) {
+  time = time + ""
+  return ("00" + time).slice(time.length)
+}
+
+function formatTime(date) {
+  var dateCount = date / 1000
+  var minutes = Math.floor(dateCount / 60)
+  var seconds = Math.floor(dateCount % 60)
+  return padLeft(minutes) + ":" + padLeft(seconds)
+}
+
+module.exports = {
+  formatNum: formatNum,
+  formatTime: formatTime,
+}

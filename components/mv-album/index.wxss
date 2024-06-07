@@ -1,0 +1,33 @@
+.mv-album {
+	position: relative;
+}
+
+.mv-album .image {
+	width: 100%;
+  height: 194rpx;
+	border-radius: 6rpx;
+}
+
+.mv-album .bottom {
+	position: absolute;
+	bottom: 2rpx;
+	left: 0;
+	right: 0;
+	padding: 10rpx 16rpx;
+	display: flex;
+	justify-content: space-between;
+	font-size: 20rpx;
+	color: #ffffff;
+}
+
+.player {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.player .icon {
+	width: 30rpx;
+	margin-right: 12rpx;
+	margin-bottom: 4rpx;
+}

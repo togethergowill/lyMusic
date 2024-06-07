@@ -1,0 +1,9 @@
+<view class="music-area" wx:if="{{ songMenu.length }}">
+	<scroll-view class="content" scroll-x enable-flex>
+		<block wx:for="{{ songMenu }}" wx:key="id">
+			<view class="item">
+				<music-album imageUrl="{{ item.coverImgUrl }}" title="{{ item.name }}" playCount="{{ item.playCount }}" data-id="{{ item.id }}" bind:musicAlbum="onMusicAlbumClick" />
+			</view>
+		</block>
+	</scroll-view>
+</view>

@@ -1,0 +1,28 @@
+<wxs src="/utils/format.wxs" module="fmt" />
+<view class="content">
+	<image src="{{ hotSongsInfo.creator.backgroundUrl }}" mode="aspectFill" class="bg-image" />
+	<view class="bg-cover"></view>
+
+	<view class="album">
+		<image class="album-picture" src="{{ hotSongsInfo.coverImgUrl }}" mode="widthFix" />
+		<view class="info">
+			<view class="name">{{ hotSongsInfo.name }}</view>
+			<view class="anthor">
+				<image class="avatar" src="{{ hotSongsInfo.creator.avatarUrl }}" mode="widthFix" />
+				<view class="nickname">{{ hotSongsInfo.creator.nickname }}</view>
+			</view>
+			<view class="desc">简介：{{ hotSongsInfo.description }}</view>
+		</view>
+	</view>
+
+	<view class="more-info">
+		<view class="favor-info bottom">
+			<image class="favor image" src="/assets/images/icons/favor_icon.png" mode="widthFix"></image>
+			<view class="text">{{ fmt.formatNum(hotSongsInfo.playCount) }}</view>
+		</view>
+		<view class="share-info bottom">
+			<image class="share image" src="/assets/images/icons/share_icon.png" mode="widthFix" />
+			<view class="text">分享</view>
+		</view>
+	</view>
+</view>

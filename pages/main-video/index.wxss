@@ -1,0 +1,12 @@
+.main-video {
+	display: flex;
+	justify-content: space-around;
+	flex-shrink: 0;
+	flex-wrap: wrap;
+	padding: 16rpx;
+}
+
+.video-item {
+	width: 48%;
+	margin-bottom: 44rpx;
+}

@@ -1,0 +1,27 @@
+.songs-item {
+	display: flex;
+	align-items: center;
+	height: 100rpx;
+}
+.songs-item .index {
+	width: 120rpx;
+	text-align: center;
+}
+
+.info .name {
+	margin-bottom: 8rpx;
+}
+
+.info .image {
+	width: 24px;
+	vertical-align: middle;
+	margin-right: 10rpx;
+}
+
+.info .singer {
+	display: inline-block;
+	font-size: 22rpx;
+	color: #666;
+}
+
+

@@ -1,0 +1,10 @@
+<view class="category-menu">
+	<view class="header">
+		<area-header title="{{ itemData.cat }}"></area-header>
+	</view>
+	<view class="music-album">
+		<view class="album" wx:for="{{ itemData.playlists }}" wx:key="id">
+			<music-album imageUrl="{{ item.coverImgUrl }}" playCount="{{ item.playCount }}" title="{{ item.name }}"></music-album>
+		</view>
+	</view>
+</view>

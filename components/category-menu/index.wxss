@@ -1,0 +1,14 @@
+.header {
+  padding: 0 20rpx;
+}
+.music-album {
+  display: flex;
+  justify-content: space-evenly;
+	flex-wrap: wrap;
+}
+
+.album {
+  width: 46%;
+	flex-shrink: 0;
+	margin-bottom: 20rpx;
+}

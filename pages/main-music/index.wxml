@@ -1,0 +1,37 @@
+<view class="search">
+	<van-search placeholder="请输入搜索关键词" readonly="{{ true }}" background="#fafafa" shape="round" />
+</view>
+
+<swiper class="banner" circular autoplay indicator-dots wx:if="{{ banners.length }}" style="height: {{ bannerHeight }}px">
+	<block wx:for="{{ banners }}" wx:key="pic">
+		<swiper-item>
+			<image class="banner-image" src="{{ item.pic }}" mode="widthFix" bindload="onBannerImageLoad" />
+		</swiper-item>
+	</block>
+</swiper>
+
+<!-- 推荐歌曲部分 -->
+<view class="reco-list" wx:if="{{ recoSongList.length }}">
+	<area-header title="推荐歌曲" hasMore bind:moreClick="onRecoMoreClick"></area-header>
+	<view class="music-item-wrap" wx:for="{{ recoSongList }}" wx:key="id">
+		<music-item itemData="{{ item }}" data-index="{{ index }}" bind:tap="getPlaySongList"></music-item>
+	</view>
+</view>
+
+<!-- 推荐歌单部分 -->
+<view class="hot-list" wx:if="{{ hotSongMenu.length}}">
+	<area-header title="热门歌单" hasMore bind:moreClick="hotSonglistClick"></area-header>
+	<music-area songMenu="{{ hotSongMenu }}"></music-area>
+</view>
+<view class="hot-list" wx:if="{{ recoSongMenu.length }}">
+	<area-header title="推荐歌单" hasMore bind:moreClick="hotSonglistClick"></area-header>
+	<music-area songMenu="{{ recoSongMenu }}"></music-area>
+</view>
+
+<!-- 巅峰榜部分 -->
+<view class="top" wx:if="{{ isRankingData }}">
+	<area-header title="巅峰榜"></area-header>
+	<view class="ranking" wx:for="{{ rankingInfo }}" wx:key="id">
+		<ranking-item itemData="{{ item }}" key="{{ index }}"></ranking-item>
+	</view>
+</view>

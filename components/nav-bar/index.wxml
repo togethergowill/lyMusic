@@ -1,0 +1,22 @@
+<view class="nav-bar">
+	<view class="divider" style="height:{{ statusHeight }}px"></view>
+	<view class="nav">
+		<view class="left" bind:tap="onLeftClick">
+			<view class="slot">
+				<slot name="left"></slot>
+			</view>
+			<view class="default">
+				<image class="icon" src="/assets/images/icons/arrow-left.png" mode="" />
+			</view>
+		</view>
+		<view class="center">
+			<view class="slot">
+				<slot name="center"></slot>
+			</view>
+			<view class="default">
+				<view>标题</view>
+			</view>
+		</view>
+		<view class="right"></view>
+	</view>
+</view>

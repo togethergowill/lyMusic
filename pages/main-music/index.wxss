@@ -1,0 +1,31 @@
+page {
+	background: #fafafa;
+	--search-background-color:#ffffff;
+	padding: 0 24rpx;
+	box-sizing: border-box;
+}
+.search {
+	margin: 20rpx 0;
+}
+.banner {
+	border-radius: 12rpx;
+	overflow: hidden;
+	margin-bottom: 20rpx;
+}
+
+.banner-image {
+	width: 100%;
+}
+
+.item{
+	margin-bottom: 20rpx;
+}
+
+.ranking {
+	background:#eeeeee;
+	border-radius: 8rpx;
+}
+
+.music-item-wrap{
+	margin-bottom: 20rpx;
+}

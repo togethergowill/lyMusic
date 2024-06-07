@@ -1,0 +1,4 @@
+<view class="area-header">
+  <view class="title" style="font-weight: {{ weight }};">{{ title }}</view>
+	<view class="more" wx:if="{{ hasMore }}" bind:tap="moreClick">更多 ></view>
+</view>

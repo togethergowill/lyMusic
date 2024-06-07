@@ -1,0 +1,7 @@
+.header {
+	padding: 0 40rpx;
+}
+
+.item {
+	margin-bottom: 30rpx;
+}

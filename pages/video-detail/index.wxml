@@ -1,0 +1,27 @@
+<wxs src="/utils/format.wxs" module="fmt"/>
+<view class="mv-detail">
+	<video 
+		src="{{ mvDetailUrl }}" 
+		class="video"
+		poster="{{ mvDetailInfo.cover }}"
+		enable-play-gesture="{{ true }}"
+		show-center-play-btn="{{ false }}"
+	/>
+	<view class="content">
+		<view class="title item">{{ mvDetailInfo.name }}</view>
+		<view class="singer item">{{ mvDetailInfo.artistName }}</view>
+		<view class="info item">
+			<text>{{fmt.formatNum(mvDetailInfo.playCount) }}次播放</text>
+			<text> - {{ mvDetailInfo.publishTime }}</text>
+		</view>
+	</view>
+</view>
+
+<scroll-view class="scroll-content" scroll-y>
+<area-header title="推荐视频" hasMore="{{ false }}" weight="{{ 400}}"/>
+<view class="related-mvs"> 
+	<block wx:for="{{ 10 }}" wx:key="*this">
+		<mv-item itemData="{{ relatedMvData }}"></mv-item>
+	</block>
+</view>
+</scroll-view>

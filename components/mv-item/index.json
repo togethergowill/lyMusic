@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "mv-album":"/components/mv-album/index"
+  }
+}

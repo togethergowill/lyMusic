@@ -1,0 +1,8 @@
+<view class="songs-item" bind:tap="navigateToMusicPlayer" data-id="{{ itemId }}">
+	<view class="index">{{ index }}</view>
+	<view class="info">
+		<view class="name">{{ name }}</view>
+		<image class="image" src="/assets/images/icons/sq_icon.png" mode="widthFix" />
+		<view class="singer">{{ singer }}</view>
+	</view>
+</view>

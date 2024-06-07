@@ -1,0 +1,33 @@
+.music-album {
+	width: 100%;
+}
+
+.album {
+	position: relative;
+}
+
+.album .image {
+	width: 100%;
+	border-radius: 12rpx;
+	vertical-align: bottom;
+}
+
+.album .count {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 6rpx 10rpx;
+	border-radius: 12rpx;
+	color: #ffffff;
+	background:rgba(0,0,0,.6);
+	font-size: 20rpx;
+}
+.bottom {
+	white-space: normal;
+	font-size: 26rpx;
+	display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+}

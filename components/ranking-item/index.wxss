@@ -1,0 +1,35 @@
+.ranking-item {
+  display: flex;
+  justify-content: space-between;
+	margin-bottom: 26rpx;
+}
+
+.info {
+	box-sizing: border-box;
+	margin: 24rpx;
+	flex: 1;
+
+}
+.inof .name {
+	font-size: 34rpx;
+}
+
+.info .songs {
+	max-width: calc(100vw - 320rpx);
+	font-size: 24rpx;
+	margin-top: 10rpx;
+	
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.info .text {
+  color: #333;
+	margin-top: 6rpx;
+}
+
+.album {
+	flex-shrink: 0;
+	width: 220rpx;
+}

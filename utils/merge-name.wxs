@@ -1,0 +1,12 @@
+function mergeName(arry) {
+  if(!arry) return
+  var name = ""
+  for (var i = 0; i < arry.length; i++) {
+    name += arry[i].name + " "
+  }
+  return name
+}
+
+module.exports = {
+  mergeName: mergeName,
+}

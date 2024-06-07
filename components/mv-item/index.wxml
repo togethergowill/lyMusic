@@ -1,0 +1,7 @@
+<view class="mv-item" bind:tap="onMvItemClick">
+	<mv-album itemData="{{ itemData }}" class="ablum"></mv-album>
+	<view class="detail">
+		<view class="title">{{ itemData.title }}</view>
+	  <view class="name">{{ itemData.name }}</view>
+	</view>
+</view>

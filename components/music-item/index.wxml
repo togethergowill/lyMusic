@@ -1,0 +1,13 @@
+<wxs src="/utils/merge-name.wxs" module="merge" />
+<view class="music-item" data-id="{{ itemData.id }}" bind:tap="navigateToMusicPlayer">
+	<view class="info">
+		<image class="image" src="{{ itemData.al.picUrl }}" mode="widthFix" />
+		<view class="title">
+			<view class="name">{{ itemData.name }}</view>
+			<view class="singer" wx:if="{{ itemData.ar }}">{{ merge.mergeName(itemData.ar) }}</view>
+		</view>
+	</view>
+	<view class="more">
+		<van-icon name="arrow" />
+	</view>
+</view>

@@ -1,0 +1,8 @@
+<wxs src="/utils/format.wxs" module="fmt"/>
+<view class="music-album"  bind:tap="albumClick">
+	<view class="album">
+		<image class="image" src="{{ imageUrl }}" mode="widthFix"/>
+		<view class="count">{{ fmt.formatNum(playCount) }}</view>
+	</view>
+	<view class="bottom" wx:if="{{ hasBottom }}">{{ title }}</view>
+</view>

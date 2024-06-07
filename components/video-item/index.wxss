@@ -1,0 +1,19 @@
+.item {
+  width: 100%;
+}
+
+.title {
+  padding: 0 10rpx;
+  font-size: 28rpx;
+  color: #666666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.content {
+	overflow: hidden;
+	border-radius: 6rpx;
+}

@@ -1,6 +1,7 @@
 import { getPlayerLyricInfo, getSongDetailInfo } from "../../services/index"
 import playSongStore from "../../stores/playSongStore"
 import { parseLyric } from "../../utils/parseLyric"
+import { throttle, debounce } from "underscore"
 
 const app = getApp()
 // 1. 播放功能的制作
@@ -36,6 +37,8 @@ Page({
     playModeName: "order",
     isPlaySong: true,
     isSliderChanging: false,
+    isFistPlay: true,
+    temp: true,
   },
 
   /**
@@ -48,43 +51,56 @@ Page({
       contentHeight: app.globalData.contentHeight,
       screenHeight: app.globalData.screenHeight,
     })
-    this.fetchSongDetailInfo()
-    this.fetchPlayerLyricInfo()
+    this.renderPlayPage(id)
 
     // 从playSongStore中获取播放列表
     playSongStore.onStates(
       ["playSongList", "playSongIndex"],
       this.getHandlerPlaySongInfo
     )
+  },
+  renderPlayPage(id) {
+    this.fetchSongDetailInfo(id)
+    this.fetchPlayerLyricInfo(id)
 
     audioContext.src = `https://music.163.com/song/media/outer/url?id=${id}.mp3`
     // 1.2 自动播放音频
     audioContext.autoplay = true
-    audioContext.onTimeUpdate(() => {
-      if (!this.data.isSliderChanging) {
-        this.updateProgress()
-      }
-      const lyricInfo = this.data.lyricInfo
-      if (!lyricInfo.length) return
-      let index = lyricInfo.length - 1
-      for (let i = 0; i < lyricInfo.length; i++) {
-        if (audioContext.currentTime * 1000 <= lyricInfo[i].time) {
-          index = i - 1
-          break
+    if (this.data.isFistPlay) {
+      this.data.isFistPlay = false
+      audioContext.onTimeUpdate(() => {
+        if (!this.data.isSliderChanging) {
+          this.updateProgress()
         }
-      }
-      this.setData({
-        currentLyricIndex: index,
-        lyricScrollTop: index * 35,
-      })
+        const lyricInfo = this.data.lyricInfo
+        if (!lyricInfo.length) return
+        let index = lyricInfo.length - 1
+        for (let i = 0; i < lyricInfo.length; i++) {
+          if (audioContext.currentTime * 1000 <= lyricInfo[i].time) {
+            index = i - 1
+            break
+          }
+        }
+        this.setData({
+          currentLyricIndex: index,
+          lyricScrollTop: index * 35,
+        })
 
-      audioContext.onWaiting(() => {
-        audioContext.pause()
+        audioContext.onWaiting(() => {
+          audioContext.pause()
+        })
+        audioContext.onCanplay(() => {
+          this.data.temp = true
+          audioContext.play()
+        })
+        audioContext.onEnded(() => {
+          if (audioContext.loop) return
+          if (this.data.temp) {
+            this.switchCurrentPlaySong()
+          }
+        })
       })
-      audioContext.onCanplay(() => {
-        audioContext.play()
-      })
-    })
+    }
   },
   updateProgress() {
     const sliderValue =
@@ -95,16 +111,16 @@ Page({
     })
   },
 
-  async fetchSongDetailInfo() {
-    const res = await getSongDetailInfo(this.data.id)
+  async fetchSongDetailInfo(id) {
+    const res = await getSongDetailInfo(id)
     this.setData({
       currentSong: res.songs[0],
       durationTime: res.songs[0].dt,
     })
   },
 
-  async fetchPlayerLyricInfo() {
-    const res = await getPlayerLyricInfo(this.data.id)
+  async fetchPlayerLyricInfo(id) {
+    const res = await getPlayerLyricInfo(id)
     this.setData({
       lyricInfo: parseLyric(res.lrc.lyric),
     })
@@ -133,19 +149,27 @@ Page({
   },
 
   switchCurrentPlaySong(isNext = true) {
+    console.log("nextOne")
+    this.data.temp = false
     let index = this.data.playSongIndex
+    const length = this.data.playSongList.length
     switch (this.data.playMode) {
+      case 1:
       case 0:
         index = isNext ? index + 1 : index - 1
+        if (index === length) {
+          index = 0
+        }
+        if (index === -1) {
+          index = length - 1
+        }
         break
       case 2:
-        index = Math.floor(Math.random() * this.data.playSongList.length)
-      default:
+        index = Math.floor(Math.random() * length)
         break
     }
-
     const newPlaySong = this.data.playSongList[index]
-    
+    this.renderPlayPage(newPlaySong.id)
 
     // 保存最新的index
     playSongStore.setState("playSongIndex", index)
@@ -166,16 +190,15 @@ Page({
     })
   },
 
-  onSliderChanging(event) {
-    audioContext.play()
+  onSliderChanging: throttle(function (event) {
     this.data.isSliderChanging = true
     const value = event.detail.value
     const currentTime = (value / 100) * this.data.durationTime
     this.setData({
       currentTime,
-      sliderValue: value,
     })
-  },
+  }, 100),
+
   // 点击事件触发前，停止audioContext改变currentTime
   readyPause() {
     audioContext.pause()
@@ -209,7 +232,17 @@ Page({
     }
   },
   getHandlerPlaySongInfo({ playSongList, playSongIndex }) {
-    this.setData({ playSongList, playSongIndex })
+    // 只有监听的值发生变化后，才会有新的值产生
+    if (playSongList) {
+      this.setData({
+        playSongList,
+      })
+    }
+    if (playSongIndex !== undefined) {
+      this.setData({
+        playSongIndex,
+      })
+    }
   },
 
   onUnload() {

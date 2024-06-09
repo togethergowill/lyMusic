@@ -35,3 +35,6 @@
 		<ranking-item itemData="{{ item }}" key="{{ index }}"></ranking-item>
 	</view>
 </view>
+
+<player-bar></player-bar>
+

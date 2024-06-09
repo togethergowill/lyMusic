@@ -4,6 +4,7 @@ const playSongStore = new HYEventStore({
   state: {
     playSongList: [],
     playSongIndex: 0,
+    isPlaySong:false
   },
 })
 

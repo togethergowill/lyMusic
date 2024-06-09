@@ -1,0 +1,11 @@
+<view class="placeholder"></view>
+<view class="player-bar">
+  <view class="album">
+	  <image src=" {{ albumUrl }}" mode="widthFix" class="image album-active"/>
+	</view>
+	<view class="lyric">你就是唯一</view>
+	<view class="control">
+	  <image class="item is-play" src="/assets/images/music/play_icon.png" mode="widthFix"/>
+		<image class="item  list" src="/assets/images/music/playlist_icon.png" mode="widthFix"/>
+	</view>
+</view>

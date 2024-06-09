@@ -1,0 +1,59 @@
+.placeholder {
+  height: 40px;
+}
+
+.player-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 20px;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.player-bar .album .image {
+  width: 50px;
+  border-radius: 50%;
+  position: relative;
+  top: -8px;
+}
+.player-bar .lyric {
+  flex: 1;
+  text-align: center;
+  font-size: 14px;
+  flex-shrink: 0;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.control .item {
+  width: 30px;
+}
+
+.control .is-play {
+  margin-right: 10px;
+}
+
+.lyric-active {
+  color: #ee93a2;
+}
+
+.album-active {
+	animation: rotateAlbum linear 10s infinite;
+}
+
+@keyframes rotateAlbum {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

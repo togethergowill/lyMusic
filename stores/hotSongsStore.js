@@ -1,5 +1,6 @@
 import { HYEventStore } from 'hy-event-store' 
 import { getPlayListDetail } from "../services/index"
+
 const hotSongsStore = new HYEventStore({
 	state:{
 		hotSongsInfo:{}
@@ -9,7 +10,7 @@ const hotSongsStore = new HYEventStore({
 			getPlayListDetail(3778678).then(res=>{
 				state.hotSongsInfo = res.playlist
 			})
-		}
+		},
 	}
 	
 })

@@ -30,11 +30,13 @@ Page({
   onLoad(options) {
     const id = options.id
     this.setData({
-      id,
       contentHeight: app.globalData.contentHeight,
       screenHeight: app.globalData.screenHeight,
     })
-    playSongStore.dispatch("renderPlayPage", id)
+
+    if (id) {
+      playSongStore.dispatch("renderPlayPage", id)
+    }
 
     // 从playSongStore中获取播放列表
     playSongStore.onStates(
@@ -47,7 +49,6 @@ Page({
   onSliderChange(event) {
     playSongStore.dispatch("onSliderChangeAction", event)
   },
-
   onSliderChanging(event) {
     playSongStore.dispatch("onSliderChangingAction", event)
   },

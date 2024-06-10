@@ -15,6 +15,10 @@ Page({
     hotSongMenu: [],
     recoSongMenu: [],
     rankingInfo: {},
+    lyricInfo: [],
+    currentLyricIndex: 0,
+    currentSong: {},
+    isPlaySong: false,
   },
   onLoad() {
     this.fetchBannerList()
@@ -27,6 +31,10 @@ Page({
       rankingStore.onState(key, this.handleRanking(key))
     }
     rankingStore.dispatch("fetchRankingDataAction")
+    playSongStore.onStates(
+      ["lyricInfo", "currentLyricIndex", "currentSong", "isPlaySong"],
+      this.getPlayerInfoHandler
+    )
   },
 
   // 获取banner数据
@@ -103,10 +111,26 @@ Page({
     playSongStore.setState("playSongList", this.data.recoSongList)
     playSongStore.setState("playSongIndex", index)
   },
+  getPlayerInfoHandler({
+    lyricInfo,
+    currentLyricIndex,
+    currentSong,
+    isPlaySong,
+  }) {
+    if (lyricInfo) this.setData({ lyricInfo })
+    if (currentLyricIndex !== undefined) this.setData({ currentLyricIndex })
+    if (currentSong) this.setData({ currentSong })
+    if (isPlaySong !== undefined) this.setData({ isPlaySong })
+  },
+
   onUnload() {
     hotSongsStore.offState("hotSongsInfo", this.handleHotSongs)
     for (const key in rankingMap) {
       rankingStore.offState(key, this.handleRanking(key))
     }
+    hotSongsStore.offStates(
+      ["lyricInfo", "currentLyricIndex", "currentSong", "isPlaySong"],
+      this.getPlayerInfoHandler
+    )
   },
 })

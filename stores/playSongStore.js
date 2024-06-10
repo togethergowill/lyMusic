@@ -22,6 +22,7 @@ export const playDataArray = [
 ]
 const playSongStore = new HYEventStore({
   state: {
+    id: 0,
     currentSong: {},
     lyricInfo: [],
 
@@ -43,11 +44,13 @@ const playSongStore = new HYEventStore({
   },
   actions: {
     renderPlayPage(cx, id) {
-      this.dispatch("fetchSongDetailInfo", id)
-      this.dispatch("fetchPlayerLyricInfo", id)
       audioContext.src = `https://music.163.com/song/media/outer/url?id=${id}.mp3`
       // 1.2 自动播放音频
       audioContext.autoplay = true
+
+      this.dispatch("fetchSongDetailInfo", id)
+      this.dispatch("fetchPlayerLyricInfo", id)
+
       if (cx.isFistPlay) {
         cx.isFistPlay = false
         audioContext.onTimeUpdate(() => {
@@ -142,7 +145,6 @@ const playSongStore = new HYEventStore({
       const value = event.detail.value
       const currentTime = (value / 100) * cx.durationTime
       cx.currentTime = currentTime
-      cx.sliderValue = value
     }, 100),
     onChangePlayModeAction(cx) {
       let playIndex = cx.playMode
@@ -170,12 +172,11 @@ const playSongStore = new HYEventStore({
     },
     // 监听pause键的点击事件
     onPlayClickAction(cx) {
-      if (!audioContext.paused) {
-        audioContext.pause()
-        cx.isPlaySong = false
-      } else {
+      cx.isPlaySong = !cx.isPlaySong
+      if (cx.isPlaySong) {
         audioContext.play()
-        cx.isPlaySong = true
+      } else {
+        audioContext.pause()
       }
     },
   },

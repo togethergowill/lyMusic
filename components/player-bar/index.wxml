@@ -1,11 +1,20 @@
 <view class="placeholder"></view>
 <view class="player-bar">
   <view class="album">
-	  <image src=" {{ albumUrl }}" mode="widthFix" class="image album-active"/>
+	  <image 
+			src=" {{ albumUrl }}" 
+			mode="widthFix" 
+			class="image album-active"
+		  style="animation-play-state: {{ isPlaySong ? 'runnig' : 'paused' }};"	
+		/>
 	</view>
-	<view class="lyric">你就是唯一</view>
+	<view class="lyric lyric-active" bind:tap="onLyStringTap">{{ lyString }}</view>
 	<view class="control">
-	  <image class="item is-play" src="/assets/images/music/play_icon.png" mode="widthFix"/>
+	  <image 
+			class="item is-play" 
+			src="/assets/images/music/{{ isPlaySong ? 'pause':'play' }}_icon.png" 
+			mode="widthFix"
+			bind:tap="onPlayIconTap"/>
 		<image class="item  list" src="/assets/images/music/playlist_icon.png" mode="widthFix"/>
 	</view>
 </view>

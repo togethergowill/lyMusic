@@ -36,5 +36,12 @@
 	</view>
 </view>
 
-<player-bar></player-bar>
+<block wx:if="{{ currentSong.name || isPlaying }}">
+	<player-bar 
+		lyString="{{ lyricInfo[currentLyricIndex].text }}" 
+		albumUrl="{{ currentSong.al.picUrl }}" 
+		isPlaySong="{{ isPlaySong }}"
+	></player-bar>
+</block>
+
 
